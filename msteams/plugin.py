@@ -64,6 +64,11 @@ class TeamsPlugin(CorePluginMixin, notify.NotificationPlugin):
 
         message_facts = []
 
+        message_facts.append({
+            'name': 'Project',
+            'value': project_name
+        })
+
         if group.culprit and title != group.culprit:
             message_facts.append({
                 'name': 'Culprit',
