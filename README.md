@@ -20,6 +20,8 @@ For local development you can install using the below command:
 pip install https://github.com/Neko-Design/sentry-msteams/archive/master.zip
 ```
 
+**In Progress:** Automatic Build and Publish to PYPI
+
 ## Configuration
 
 In your project, locate the Integrations management screen and click 'Configure Plugin' below the 'Microsoft Teams' item.
