@@ -7,7 +7,7 @@ from sentry.utils.http import absolute_uri
 
 from sentry_plugins.base import CorePluginMixin
 
-class TeamsPlugin(CorePluginMixin, notify.NotificationPlugin):
+class TeamsPlugin(notify.NotificationPlugin):
     title = 'Microsoft Teams'
     slug = 'msteams'
     author = 'Ewen McCahon'
