@@ -10,8 +10,13 @@ from sentry_plugins.base import CorePluginMixin
 class TeamsPlugin(CorePluginMixin, notify.NotificationPlugin):
     title = 'Microsoft Teams'
     slug = 'msteams'
-    author = 'Post Notifications to Microsoft Teams Channel'
+    author = 'Ewen McCahon'
+    author_url = 'https://ewenmccahon.me'
+    description = 'Post Notifications to Microsoft Teams Channel'
     version = '0.1.0'
+    resource_links = (
+        ('Source', 'https://github.com/Neko-Design/sentry-msteams'),
+    )
     conf_key = 'msteams'
 
     def create_markdown_link(self, display, target_url):
