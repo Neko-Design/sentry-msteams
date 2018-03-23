@@ -63,6 +63,7 @@ class TeamsPlugin(notify.NotificationPlugin):
         webhook_url = self.get_option('webhook_url', project)
         title = event.message_short.encode('utf-8')
         project_name = project.get_full_name().encode('utf-8')
+        error_message = event.error().encode('utf-8')
         notification_link = self.create_markdown_link('Click Here',
                                                       self.add_notification_referrer_param(
                                                           group.get_absolute_url()))
@@ -73,7 +74,19 @@ class TeamsPlugin(notify.NotificationPlugin):
             'name': 'Project',
             'value': project_name
         })
-
+        
+        if error_message:
+            message_facts.append({
+                'name': 'Error',
+                'value': error_message
+            })
+            
+        if group.times_seen:
+            message_facts.append({
+                'name': 'Times Seen',
+                'value': 'Seen %s Times' % group.times_seen
+            })
+            
         if group.culprit and title != group.culprit:
             message_facts.append({
                 'name': 'Culprit',
@@ -83,7 +96,7 @@ class TeamsPlugin(notify.NotificationPlugin):
         message_object = {
             'sections': [
                 {
-                    'activityTitle': title,
+                    'activityTitle': '[%s] %s' % (project_name, title),
                     'activityText': '%s to View this Event in Sentry' % notification_link,
                     'facts': message_facts
                 }
