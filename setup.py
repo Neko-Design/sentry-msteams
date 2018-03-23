@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sentry-msteams',
-    version='0.1.0',
+    version='0.3.0',
     author='Ewen McCahon',
     author_email='ewen.m.mccahon@student.uts.edu.au',
     url='https://github.com/Neko-Design/sentry-msteams',

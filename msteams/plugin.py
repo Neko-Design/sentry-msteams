@@ -13,7 +13,7 @@ class TeamsPlugin(notify.NotificationPlugin):
     author = 'Ewen McCahon'
     author_url = 'https://ewenmccahon.me'
     description = 'Post Notifications to Microsoft Teams Channel'
-    version = '0.2.0'
+    version = '0.3.0'
     resource_links = (
         ('Source', 'https://github.com/Neko-Design/sentry-msteams'),
     )
@@ -32,19 +32,19 @@ class TeamsPlugin(notify.NotificationPlugin):
         """
         return [
             {
-                'name':
-                'webhook_url',
-                'label':
-                'Teams Webhook URL',
-                'type':
-                'url',
-                'placeholder':
-                'https://outlook.microsoft.com/webhook/abcde-12345-5555-1111-eeee',
-                'required':
-                True,
-                'help':
-                'Microsoft Teams Incoming Webhook URL'
-            }
+                'name': 'webhook_url',
+                'label': 'Teams Webhook URL',
+                'type': 'url',
+                'placeholder': 'https://outlook.microsoft.com/webhook/abcde-12345-5555-1111-eeee',
+                'required': True,
+                'help': 'Microsoft Teams Incoming Webhook URL'
+            }, {
+                'name': 'show_tags',
+                'label': 'Show Tags',
+                'type': 'bool',
+                'required': False,
+                'help': 'Show Event Tags in Teams Message',
+}
         ]
 
     def notify(self, notification):
@@ -104,5 +104,24 @@ class TeamsPlugin(notify.NotificationPlugin):
             '@type': 'MessageCard',
             'summary': '[%s] %s' % (project_name, title)
         }
+
+        if self.get_option('show_tags', project):
+            tags = []
+            sentry_tags = event.get_tags()
+            if not sentry_tags:
+                return ()
+            sentry_tag_tuples = ((tagstore.get_tag_key_label(tagname), tagstore.get_tag_value_label(tagname, tagvalue))
+                                 for tagname, tagvalue in sentry_tags)
+            for tag_name, tag_value in sentry_tag_tuples:
+                tags.append({
+                    'name': tag_name.encode('utf-8'),
+                    'value': tag_value.encode('utf-8')
+                })
+            section = {
+                'activityTitle': 'Tags on Event',
+                'activityText': 'The following Tags were attached to the Event',
+                'facts': tags
+            }
+            message_object['sections'].append(section)
 
         return http.safe_urlopen(webhook_url, method='POST', data=json.dumps(message_object))
