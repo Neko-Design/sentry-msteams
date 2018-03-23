@@ -108,20 +108,19 @@ class TeamsPlugin(notify.NotificationPlugin):
         if self.get_option('show_tags', project):
             tags = []
             sentry_tags = event.get_tags()
-            if not sentry_tags:
-                return ()
-            sentry_tag_tuples = ((tagstore.get_tag_key_label(tagname), tagstore.get_tag_value_label(tagname, tagvalue))
-                                 for tagname, tagvalue in sentry_tags)
-            for tag_name, tag_value in sentry_tag_tuples:
-                tags.append({
-                    'name': tag_name.encode('utf-8'),
-                    'value': tag_value.encode('utf-8')
-                })
-            section = {
-                'activityTitle': 'Tags on Event',
-                'activityText': 'The following Tags were attached to the Event',
-                'facts': tags
-            }
-            message_object['sections'].append(section)
+            if sentry_tags:
+                sentry_tag_tuples = ((tagstore.get_tag_key_label(tagname), tagstore.get_tag_value_label(tagname, tagvalue))
+                                     for tagname, tagvalue in sentry_tags)
+                for tag_name, tag_value in sentry_tag_tuples:
+                    tags.append({
+                        'name': tag_name.encode('utf-8'),
+                        'value': tag_value.encode('utf-8')
+                    })
+                section = {
+                    'activityTitle': 'Tags on Event',
+                    'activityText': 'The following Tags were attached to the Event',
+                    'facts': tags
+                }
+                message_object['sections'].append(section)
 
         return http.safe_urlopen(webhook_url, method='POST', data=json.dumps(message_object))
