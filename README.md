@@ -2,7 +2,7 @@
 
 Microsoft Teams Integration for [Sentry Error Tracking Software](https://sentry.io/welcome/).
 
-<img src="sample_exception.png" width="350">
+<img src="sample_exception_0.2.0.png" width="425">
 
 Based off the [Sentry Plugins](https://github.com/getsentry/sentry-plugins) written by the Sentry Team. Thanks for the excellent tool guys!
 
