@@ -20,6 +20,16 @@ For local development you can install using the below command:
 pip install https://github.com/Neko-Design/sentry-msteams/archive/master.zip
 ```
 
+### Important Note for Sentry 9
+
+Sentry 9 introduced some additional dependencies on specific versions of Redis which appear to cause issues installing plugins.
+
+To work around this issue, you can add the below line to the top of your `requirements.txt` file.
+
+```
+redis-py-cluster==1.3.4
+```
+
 **In Progress:** Automatic Build and Publish to PYPI
 
 ## Configuration
