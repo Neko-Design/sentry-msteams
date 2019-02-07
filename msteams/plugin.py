@@ -13,7 +13,7 @@ class TeamsPlugin(notify.NotificationPlugin):
     author = 'Ewen McCahon'
     author_url = 'https://ewenmccahon.me'
     description = 'Post Notifications to Microsoft Teams Channel'
-    version = '0.5.0'
+    version = '0.6.0'
     resource_links = (
         ('Source', 'https://github.com/Neko-Design/sentry-msteams'),
     )
