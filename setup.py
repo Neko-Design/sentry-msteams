@@ -10,13 +10,20 @@ to `Microsoft Teams <https://products.office.com/en-us/microsoft-teams/group-cha
 """
 
 from setuptools import setup, find_packages
+import os
+
+cwd = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+readme_text = open(os.path.join(cwd, 'README.md')).read()
 
 setup(
     name='sentry-msteams',
-    version='0.3.0',
+    version='0.5.0',
     author='Ewen McCahon',
-    author_email='ewen.m.mccahon@student.uts.edu.au',
+    author_email='hi@ewenmccahon.me',
     url='https://github.com/Neko-Design/sentry-msteams',
+    long_description=readme_text,
+    long_description_content_type="text/markdown",
+    license='apache2',
     description='A Sentry extension which posts notifications to Microsoft Teams (https://products.office.com/en-us/microsoft-teams/group-chat-software).',
     packages=find_packages(),
     install_requires=[
