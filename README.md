@@ -41,3 +41,7 @@ In your project, locate the Integrations management screen and click 'Configure 
 There is only one configuration option at the moment, the WebHook URL to send messages to. Create a new Incoming Webhook in Microsoft Teams and paste the URL into the configuration screen, then click 'Save Changes'.
 
 When ready, click 'Test Plugin' to generate an exception and send a message to your chosen WebHook URL.
+
+## Troubleshooting
+
+If you are running sentry through docker and experiencing alerts not being sent to Microsoft Teams or a KeyError-exception for "msteams" being raised - restart your worker container. This will resolve the problem.
