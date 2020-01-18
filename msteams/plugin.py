@@ -44,7 +44,7 @@ class TeamsPlugin(notify.NotificationPlugin):
                 'type': 'bool',
                 'required': False,
                 'help': 'Show Event Tags in Teams Message',
-}
+            }
         ]
 
     def notify(self, notification):
@@ -61,12 +61,19 @@ class TeamsPlugin(notify.NotificationPlugin):
             return
 
         webhook_url = self.get_option('webhook_url', project)
-        title = event.message_short.encode('utf-8')
         project_name = project.get_full_name().encode('utf-8')
-        error_message = event.error().encode('utf-8')
         notification_link = self.create_markdown_link('Click Here',
                                                       self.add_notification_referrer_param(
                                                           group.get_absolute_url()))
+        
+        try:
+            # Sentry 9
+            title = event.message_short.encode('utf-8')
+            error_message = event.error().encode('utf-8')
+        except AttributeError:
+            # Sentry 10
+            title = event.title.encode('utf-8')
+            error_message = event.message.encode('utf-8')
 
         message_facts = []
 
