@@ -117,7 +117,7 @@ class TeamsPlugin(notify.NotificationPlugin):
             try:
                 # Sentry 9
                 sentry_tags = event.get_tags()
-            except:
+            except AttributeError:
                 # Sentry 10
                 sentry_tags = event.tags
             if sentry_tags:
