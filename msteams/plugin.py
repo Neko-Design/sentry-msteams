@@ -114,7 +114,12 @@ class TeamsPlugin(notify.NotificationPlugin):
 
         if self.get_option('show_tags', project):
             tags = []
-            sentry_tags = event.get_tags()
+            try:
+                # Sentry 9
+                sentry_tags = event.get_tags()
+            except:
+                # Sentry 10
+                sentry_tags = event.tags
             if sentry_tags:
                 sentry_tag_tuples = ((tagstore.get_tag_key_label(tagname), tagstore.get_tag_value_label(tagname, tagvalue))
                                      for tagname, tagvalue in sentry_tags)
