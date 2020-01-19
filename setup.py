@@ -17,7 +17,7 @@ readme_text = open(os.path.join(cwd, 'README.md')).read()
 
 setup(
     name='sentry-msteams',
-    version='0.6.0',
+    version='0.7.0',
     author='Ewen McCahon',
     author_email='hi@ewenmccahon.me',
     url='https://github.com/Neko-Design/sentry-msteams',
