@@ -47,7 +47,7 @@ class TeamsPlugin(notify.NotificationPlugin):
             }
         ]
 
-    def notify(self, notification, raise_exception = None):
+    def notify(self, notification, raise_exception=None):
         """
         notify
         Send Event Notifications
