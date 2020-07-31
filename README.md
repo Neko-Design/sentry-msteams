@@ -26,7 +26,11 @@ To add Sentry alerts to your channel, configure a new Incoming Webhook connector
 
 When ready, click 'Test Plugin' to generate an exception and send a message to your chosen WebHook URL.
 
-## Important Note for Sentry 9
+## Troubleshooting
+
+When running in Docker, Sentry occasionally fails to load the plugin on the worker container. This can result in not sending alerts when triggered, and you'll often see a KeyError in the logs such as `KeyError(u'msteams',)`. To resolve, restart the worker container and fire another alert.
+
+### Important Note for Sentry 9
 
 Sentry 9 introduced some additional dependencies on specific versions of Redis which appear to cause issues installing plugins.
 
