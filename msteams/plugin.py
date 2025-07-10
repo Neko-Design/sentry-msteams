@@ -13,7 +13,7 @@ class TeamsPlugin(notify.NotificationPlugin):
     author = 'Ewen McCahon'
     author_url = 'https://ewenmccahon.me'
     description = 'Post Notifications to Microsoft Teams Channel'
-    version = '0.8.0'
+    version = '0.9.0'
     resource_links = (
         ('Source', 'https://github.com/Neko-Design/sentry-msteams'),
     )
@@ -62,9 +62,7 @@ class TeamsPlugin(notify.NotificationPlugin):
 
         webhook_url = self.get_option('webhook_url', project)
         project_name = project.get_full_name().encode('utf-8')
-        notification_link = self.create_markdown_link('Click Here',
-                                                      self.add_notification_referrer_param(
-                                                          group.get_absolute_url()))
+        notification_link = self.create_markdown_link('Click Here', group.get_absolute_url())
         
         try:
             # Sentry 9
